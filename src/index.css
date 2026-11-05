@@ -1,0 +1,218 @@
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* ===== Zolvex brand palette (extracted from zolvex.ai) ===== */
+  --color-brand: #fa5f01; /* oklch(68% .205 42) — primary orange */
+  --color-brand-600: #f55e00; /* ring / hover */
+  --color-brand-400: #ff9b24; /* accent orange */
+  --color-brand-300: #ffb259;
+
+  --color-ink: #080605; /* near-black */
+  --color-ink-900: #0e0a08;
+  --color-ink-800: #15110d; /* sidebar dark */
+  --color-ink-700: #241e19; /* sidebar accent dark */
+
+  --color-paper: #fbfaf9; /* off-white */
+  --color-bg: #f8f6f5;
+  --color-mutedbg: #eae7e4;
+  --color-muted: #605954; /* muted foreground */
+
+  --font-display: "Chakra Petch", ui-sans-serif, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, sans-serif;
+
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-glow: glow 4s ease-in-out infinite;
+  --animate-grid: grid-pan 28s linear infinite;
+  --animate-ring: ring 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.65);
+    opacity: 0;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+}
+@keyframes glow {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+@keyframes grid-pan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 64px 64px;
+  }
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-paper);
+    color: var(--color-ink-900);
+    overflow-x: hidden;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  .font-display {
+    font-family: var(--font-display);
+  }
+  ::selection {
+    background: var(--color-brand);
+    color: #fff;
+  }
+  img {
+    display: block;
+    max-width: 100%;
+  }
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-mutedbg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-600);
+}
+
+/* Utility: subtle dot/grid backdrop */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(8, 6, 5, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(8, 6, 5, 0.055) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+@utility bg-grid-dark {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+/* Soft fade on the left/right edges (marquees) */
+@utility mask-fade-x {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 9%,
+    #000 91%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Gradient text */
+@utility text-gradient-brand {
+  background: linear-gradient(100deg, #f74a00 0%, #fa5f01 45%, #ff9b24 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+@keyframes bar-load {
+  0%,
+  100% {
+    transform: scaleX(0.2);
+  }
+  50% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes progress-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
